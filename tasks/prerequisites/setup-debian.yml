@@ -4,4 +4,11 @@
     name:
       - apt-transport-https
       - dirmngr
-      - python-apt
+      - "{{ python_apt_pkg }}"
+  vars:
+    python_apt_pkg: |-
+      {%- if ansible_distribution_major_version is version('11', '>=') -%}
+        python3-apt
+      {%- else -%}
+        python-apt
+      {%- endif -%}
